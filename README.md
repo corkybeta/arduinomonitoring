@@ -72,6 +72,6 @@ When adding a new sequence, consider adding a return to the standard value outsi
 When writing sequences, note that delay is in milliseconds. Large values such as 500 are for flashing sequences and a smaller value such as 5 is used for fading sequences.  
 
 ### Debugging
-The HTML page hosted on the webserver is useful for testing new sequences. When that isn't working, the Arduino IDE has a Serial Monitor that shows HTTP requests and the IP of the board. All HTTP requests can be sent to the Serial Monitor with this line in the loop:
+The HTML page hosted on the webserver is useful for testing new sequences. When that isn't working, the Arduino IDE has a Serial Monitor that shows HTTP requests and the IP of the board. All HTTP requests can be sent to the Serial Monitor with this commented ou line in the loop:
 
     //Serial.print(c);
