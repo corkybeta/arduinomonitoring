@@ -16,9 +16,8 @@
 // Initialising Pin outputs 
 int BLUE = 6;                   
 int GREEN = 5; 
-int RED = 3; 
-int brightness = 0;
-int DELAY = 5;
+int RED = 3;
+int repeats = 0;
 String readString;
 
 #include <SPI.h>
@@ -67,7 +66,7 @@ void loop() {
          }
          //if HTTP request has ended
          if (c == '\n') {          
-           Serial.println(readString); //print to serial monitor for debuging
+           Serial.println(readString); //print to serial monitor for debugging
            client.println("HTTP/1.1 200 OK"); //send new page
            client.println("Content-Type: text/html");
            client.println();     
@@ -77,36 +76,66 @@ void loop() {
            client.println("</head>");
            client.println("<body>");
            client.println("<br />");  
+           client.println("<a href=\"/?sequence1\"\">Sequence 1</a>"); //url addition
+           client.println("<br />");
+           client.println("<a href=\"/?sequence2\"\">Sequence 2</a>");
+           client.println("<br />");
            client.println("<a href=\"/?redon\"\">Turn On RED LED</a>");
-           client.println("<a href=\"/?redoff\"\">Turn Off RED LED</a><br />");
+           client.println("<br />"); 
            client.println("<a href=\"/?greenon\"\">Turn On GREEN LED</a>");
-           client.println("<a href=\"/?greenoff\"\">Turn Off GREEN LED</a><br />");   
+           client.println("<br />"); 
            client.println("<a href=\"/?blueon\"\">Turn On BLUE LED</a>");
-           client.println("<a href=\"/?blueoff\"\">Turn Off BLUE LED</a><br />");   
-           client.println("<br />");     
+           client.println("<br />"); 
            client.println("</body>");
            client.println("</html>");
            delay(1);
            //stopping client
            client.stop();
-           //controls the Arduino if you press the buttons
+           //these commands read the appended url addition and activate the LEDs accordingly
+           if (readString.indexOf("?sequence1") >0){
+               for (repeats = 10; repeats > 0; repeats --) {
+                analogWrite(GREEN, 0);
+                analogWrite(RED, 255);
+                analogWrite(BLUE, 0);
+                delay(500);
+                analogWrite(GREEN, 0);
+                analogWrite(RED, 0);
+                analogWrite(BLUE, 0);
+                delay(500);
+               }
+               analogWrite(RED, 250);
+               analogWrite(BLUE, 166);
+               analogWrite(GREEN, 26);
+           }
+           if (readString.indexOf("?sequence2") >0){
+               for (repeats = 5; repeats > 0; repeats --) {
+                analogWrite(GREEN, 0);
+                analogWrite(RED, 0);
+                analogWrite(BLUE, 255);
+                delay(500);
+                analogWrite(GREEN, 0);
+                analogWrite(RED, 0);
+                analogWrite(BLUE, 0);
+                delay(500);
+               }
+               analogWrite(RED, 250);
+               analogWrite(BLUE, 166);
+               analogWrite(GREEN, 26);
+           }
            if (readString.indexOf("?redon") >0){
                analogWrite(RED, 255);
-           }
-           if (readString.indexOf("?redoff") >0){
-               analogWrite(RED, 0);
-           }
-           if (readString.indexOf("?greenon") >0){
-               analogWrite(GREEN, 255);
-           }
-           if (readString.indexOf("?greenoff") >0){
                analogWrite(GREEN, 0);
+               analogWrite(BLUE, 0);
+           }         
+           if (readString.indexOf("?greenon") >0){
+               analogWrite(RED, 0);
+               analogWrite(GREEN, 255);
+               analogWrite(BLUE, 0);
            }
            if (readString.indexOf("?blueon") >0){
+               analogWrite(RED, 0);
+               analogWrite(GREEN, 0);
                analogWrite(BLUE, 255);
-           }
-           if (readString.indexOf("?blueoff") >0){
-               analogWrite(BLUE, 0);
            }
            //clearing string for next read
            readString="";
