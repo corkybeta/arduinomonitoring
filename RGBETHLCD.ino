@@ -4,46 +4,16 @@
  * Leonardo  2 (SDA), 3 (SCL)
  * Due 20 (SDA), 21 (SCL), SDA1, SCL1
  */
- 
-//initialising pin outputs 
-int BLUE = 6;                   
-int GREEN = 5; 
-int RED = 3;
-int repeats = 0;
-int brightness = 0;
-String readString;
 
 #include <SPI.h>
 #include <Ethernet.h>
-
-//MAC address is set. values for ip, dns, gateway and subnet are added below
-byte mac[] = {
-  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
-};
-IPAddress ip(192, 168, 1, 177);
-IPAddress myDns(192,168,1, 1);
-IPAddress gateway(192, 168, 1, 1);
-IPAddress subnet(255, 255, 255, 0);
-//port for webserver
-EthernetServer server(80);
-
-
 #include <Wire.h>
 #include <LCD.h>
 #include <LiquidCrystal_I2C.h>
+#include "config.h"
 
-#define I2C_ADDR 0x27 // <<----- Add your address here. Find it from I2C Scanner
-#define BACKLIGHT_PIN     3
-#define En_pin  2
-#define Rw_pin  1
-#define Rs_pin  0
-#define D4_pin  4
-#define D5_pin  5
-#define D6_pin  6
-#define D7_pin  7
-
+//i2c controller configuration
 LiquidCrystal_I2C lcd(I2C_ADDR,En_pin,Rw_pin,Rs_pin,D4_pin,D5_pin,D6_pin,D7_pin);
-
 
 void setup() {
   //open serial communications and wait for port to open:
@@ -60,8 +30,7 @@ void setup() {
   analogWrite(BLUE, 166);
   analogWrite(GREEN, 26);
 
-
-  lcd.begin (16,2); // <<----- My LCD was 16x2
+  lcd.begin (16,2); // for a 16x2 screen
   // Switch on the backlight
   lcd.setBacklightPin(BACKLIGHT_PIN,POSITIVE);
   lcd.setBacklight(HIGH);
@@ -84,9 +53,9 @@ void loop() {
           readString += c;
           //debugging output
           //Serial.print(c);
-         }
-         //if HTTP request has ended
-         if (c == '\n') {          
+        }
+        //if HTTP request has ended
+        if (c == '\n') {          
           Serial.println(readString); //print to serial monitor for debugging
           client.println("HTTP/1.1 200 OK"); //send new page
           client.println("Content-Type: text/html");
@@ -138,6 +107,10 @@ void loop() {
             analogWrite(RED, 250);
             analogWrite(BLUE, 166);
             analogWrite(GREEN, 26);
+            lcd.clear();
+            lcd.print(ip);
+            lcd.setCursor (0,1);
+            lcd.print(defaultMessage);
           }
           if (readString.indexOf("?sequence2") >0){
             lcd.clear();
@@ -157,6 +130,10 @@ void loop() {
             analogWrite(RED, 250);
             analogWrite(BLUE, 166);
             analogWrite(GREEN, 26);
+            lcd.clear();
+            lcd.print(ip);
+            lcd.setCursor (0,1);
+            lcd.print(defaultMessage);
           }
           if (readString.indexOf("?sequence3") >0){
             lcd.clear();
@@ -172,6 +149,10 @@ void loop() {
             analogWrite(RED, 250);
             analogWrite(BLUE, 166);
             analogWrite(GREEN, 26);
+            lcd.clear();
+            lcd.print(ip);
+            lcd.setCursor (0,1);
+            lcd.print(defaultMessage);
           }
           if (readString.indexOf("?sequence4") >0){
           //a fading LED
@@ -196,6 +177,10 @@ void loop() {
             analogWrite(RED, 250);
             analogWrite(BLUE, 166);
             analogWrite(GREEN, 26);
+            lcd.clear();
+            lcd.print(ip);
+            lcd.setCursor (0,1);
+            lcd.print(defaultMessage);
           }
           if (readString.indexOf("?redon") >0){
             analogWrite(RED, 255);
@@ -231,7 +216,7 @@ void loop() {
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
-            lcd.print("VPW Systems");
+            lcd.print(defaultMessage);
           }
           //clearing string for next read
           readString="";
