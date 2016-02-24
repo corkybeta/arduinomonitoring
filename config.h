@@ -3,12 +3,6 @@ int BLUE = 6;
 int GREEN = 5; 
 int RED = 3;
 
-//variables
-int repeats = 0;
-int brightness = 0;
-String readString;
-String defaultMessage = "VPW Systems";
-
 //MAC address is set. values for ip, dns, gateway and subnet are added below
 byte mac[] = {
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
@@ -20,8 +14,16 @@ IPAddress subnet(255, 255, 255, 0);
 //port for webserver
 EthernetServer server(80);
 
+//variables
+int repeats = 0;
+int brightness = 0;
+String readString;
+String standardMessage1 = ip;
+String standardMessage2 = "VPW Systems";
+
+//i2c LCD
 #define I2C_ADDR 0x27 //address needs to be set, differs between i2c controllers
-#define BACKLIGHT_PIN  3
+#define BACKLIGHT_PIN  3 //pin for LCD backlight
 #define En_pin  2
 #define Rw_pin  1
 #define Rs_pin  0
