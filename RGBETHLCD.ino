@@ -26,9 +26,9 @@ void setup() {
   server.begin();
   Serial.print("server is at ");
   Serial.println(Ethernet.localIP());
-  analogWrite(RED, 250);
-  analogWrite(BLUE, 166);
-  analogWrite(GREEN, 26);
+  analogWrite(RED, standardRed);
+  analogWrite(GREEN, standardGreen);
+  analogWrite(BLUE, standardBlue);
 
   lcd.begin (16,2); //for a 16x2 screen
   // Switch on the backlight
@@ -95,18 +95,18 @@ void loop() {
             lcd.setCursor (0,1);
             lcd.print("Sequence 1");//prints customised message on second line
             for (repeats = 10; repeats > 0; repeats --) {
-              analogWrite(GREEN, 0);
               analogWrite(RED, 255);
+              analogWrite(GREEN, 0);
               analogWrite(BLUE, 0);
               delay(500);
-              analogWrite(GREEN, 0);
               analogWrite(RED, 0);
+              analogWrite(GREEN, 0);
               analogWrite(BLUE, 0);
               delay(500);
             }
-            analogWrite(RED, 250);
-            analogWrite(BLUE, 166);
-            analogWrite(GREEN, 26);
+            analogWrite(RED, standardRed);
+            analogWrite(GREEN, standardGreen);
+            analogWrite(BLUE, standardBlue);
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
@@ -118,18 +118,18 @@ void loop() {
             lcd.setCursor (0,1);
             lcd.print("Sequence 2");
             for (repeats = 5; repeats > 0; repeats --) {
-              analogWrite(GREEN, 0);
               analogWrite(RED, 0);
+              analogWrite(GREEN, 0);
               analogWrite(BLUE, 255);
               delay(500);
-              analogWrite(GREEN, 0);
               analogWrite(RED, 0);
+              analogWrite(GREEN, 0);
               analogWrite(BLUE, 0);
               delay(500);
             }
-            analogWrite(RED, 250);
-            analogWrite(BLUE, 166);
-            analogWrite(GREEN, 26);
+            analogWrite(RED, standardRed);
+            analogWrite(GREEN, standardGreen);
+            analogWrite(BLUE, standardBlue);
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
@@ -141,14 +141,14 @@ void loop() {
             lcd.setCursor (0,1);
             lcd.print("Sequence 3");
             for (repeats = 60; repeats > 0; repeats --) {
-              analogWrite(GREEN, 255);
               analogWrite(RED, 0);
+              analogWrite(GREEN, 255);
               analogWrite(BLUE, 0);
               delay(1000);
             }
-            analogWrite(RED, 250);
-            analogWrite(BLUE, 166);
-            analogWrite(GREEN, 26);
+            analogWrite(RED, standardRed);
+            analogWrite(GREEN, standardGreen);
+            analogWrite(BLUE, standardBlue);
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
@@ -162,21 +162,21 @@ void loop() {
             lcd.print("Sequence 4");
             for (repeats = 15; repeats > 0; repeats --) {
               for (brightness = 0; brightness < 255; brightness ++) {
-                analogWrite(GREEN, brightness);
                 analogWrite(RED, brightness);
+                analogWrite(GREEN, brightness);
                 analogWrite(BLUE, brightness);
                 delay(5);
               }
               for (brightness = 255; brightness > 0; brightness --) {
-                analogWrite(GREEN, brightness);
                 analogWrite(RED, brightness);
+                analogWrite(GREEN, brightness);
                 analogWrite(BLUE, brightness);
                 delay(5);
               }
             }
-            analogWrite(RED, 250);
-            analogWrite(BLUE, 166);
-            analogWrite(GREEN, 26);
+            analogWrite(RED, standardRed);
+            analogWrite(GREEN, standardGreen);
+            analogWrite(BLUE, standardBlue);
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
@@ -210,9 +210,9 @@ void loop() {
             lcd.print("BLUE");
           }
           if (readString.indexOf("?default") >0){
-            analogWrite(RED, 250);
-            analogWrite(GREEN, 166);
-            analogWrite(BLUE, 26);
+            analogWrite(RED, standardRed);
+            analogWrite(GREEN, standardGreen);
+            analogWrite(BLUE, standardBlue);
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
