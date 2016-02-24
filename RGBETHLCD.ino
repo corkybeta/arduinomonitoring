@@ -30,14 +30,14 @@ void setup() {
   analogWrite(BLUE, 166);
   analogWrite(GREEN, 26);
 
-  lcd.begin (16,2); // for a 16x2 screen
+  lcd.begin (16,2); //for a 16x2 screen
   // Switch on the backlight
   lcd.setBacklightPin(BACKLIGHT_PIN,POSITIVE);
   lcd.setBacklight(HIGH);
-  lcd.home (); // go home
-  lcd.print(ip);
+  lcd.home (); //go home
+  lcd.print(standardMessage1); //print the standard address on the first line
   lcd.setCursor (0,1);
-  lcd.print("VPW Systems");
+  lcd.print(standardMessage2);
 }
 
 void loop() {
@@ -90,10 +90,10 @@ void loop() {
           client.stop();
           //these commands read the appended url addition and activate the LEDs accordingly
           if (readString.indexOf("?sequence1") >0){
-            lcd.clear();
-            lcd.print(ip);
+            lcd.clear(); //clears the screen
+            lcd.print(standardMessage1);//puts back first line message
             lcd.setCursor (0,1);
-            lcd.print("Sequence 1");
+            lcd.print("Sequence 1");//prints customised message on second line
             for (repeats = 10; repeats > 0; repeats --) {
               analogWrite(GREEN, 0);
               analogWrite(RED, 255);
@@ -110,11 +110,11 @@ void loop() {
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
-            lcd.print(defaultMessage);
+            lcd.print(standardMessage2);
           }
           if (readString.indexOf("?sequence2") >0){
             lcd.clear();
-            lcd.print(ip);
+            lcd.print(standardMessage1);
             lcd.setCursor (0,1);
             lcd.print("Sequence 2");
             for (repeats = 5; repeats > 0; repeats --) {
@@ -133,11 +133,11 @@ void loop() {
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
-            lcd.print(defaultMessage);
+            lcd.print(standardMessage2);
           }
           if (readString.indexOf("?sequence3") >0){
             lcd.clear();
-            lcd.print(ip);
+            lcd.print(standardMessage1);
             lcd.setCursor (0,1);
             lcd.print("Sequence 3");
             for (repeats = 60; repeats > 0; repeats --) {
@@ -152,12 +152,12 @@ void loop() {
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
-            lcd.print(defaultMessage);
+            lcd.print(standardMessage2);
           }
           if (readString.indexOf("?sequence4") >0){
           //a fading LED
             lcd.clear();
-            lcd.print(ip);
+            lcd.print(standardMessage1);
             lcd.setCursor (0,1);
             lcd.print("Sequence 4");
             for (repeats = 15; repeats > 0; repeats --) {
@@ -180,14 +180,14 @@ void loop() {
             lcd.clear();
             lcd.print(ip);
             lcd.setCursor (0,1);
-            lcd.print(defaultMessage);
+            lcd.print(standardMessage2);
           }
           if (readString.indexOf("?redon") >0){
             analogWrite(RED, 255);
             analogWrite(GREEN, 0);
             analogWrite(BLUE, 0);
             lcd.clear();
-            lcd.print(ip);
+            lcd.print(standardMessage1);
             lcd.setCursor (0,1);
             lcd.print("RED");
           }         
@@ -196,7 +196,7 @@ void loop() {
             analogWrite(GREEN, 255);
             analogWrite(BLUE, 0);
             lcd.clear();
-            lcd.print(ip);
+            lcd.print(standardMessage1);
             lcd.setCursor (0,1);
             lcd.print("GREEN");
           }
@@ -205,7 +205,7 @@ void loop() {
             analogWrite(GREEN, 0);
             analogWrite(BLUE, 255);
             lcd.clear();
-            lcd.print(ip);
+            lcd.print(standardMessage1);
             lcd.setCursor (0,1);
             lcd.print("BLUE");
           }
@@ -214,9 +214,9 @@ void loop() {
             analogWrite(GREEN, 166);
             analogWrite(BLUE, 26);
             lcd.clear();
-            lcd.print(ip);
+            lcd.print(standardMessage1);
             lcd.setCursor (0,1);
-            lcd.print(defaultMessage);
+            lcd.print(defaultMessage2);
           }
           //clearing string for next read
           readString="";
