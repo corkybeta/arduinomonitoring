@@ -18,8 +18,7 @@ EthernetServer server(80);
 int repeats = 0;
 int brightness = 0;
 String readString;
-String standardMessage1 = ip;
-String standardMessage2 = "VPW Systems";
+String standardMessage = "VPW Systems";
 
 //i2c LCD
 #define I2C_ADDR 0x27 //address needs to be set, differs between i2c controllers
