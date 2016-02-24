@@ -2,16 +2,17 @@
 This script utilises an Arduino with an ethernet and RGB shield, plus a 16x2 LCD screen. The Arduino can be connected to a router and reached from a local IP or it will function on a direct ethernet connection if the machine connected is configured correctly. **No DHCP functionality is added** to the script and it relies on a static IP. The main .ino file relies on a secondary config.h file, and if they are in the same folder the Arduino IDE will open them both in separate tabs and compile them together.
 
 ### config.h
+The pin inputs for the RGB shield are numbered on the board. They need to be initialised before use.
 
     int BLUE = 6;                   
     int GREEN = 5;
     int RED = 3;
 
-The pin inputs for the RGB shield are numbered on the board. They need to be initialised before use.
+This value sets the standard LCD output for the second line of a 16x2 screen.
 
     String standardMessage = "VPW Systems";
 
-This value sets the standard LCD output for the second line of a 16x2 screen.
+The network configuration for the Arduino happens here. Most of these values can be commented out and should auto configure.
 
     IPAddress ip(192, 168, 1, 177);
     IPAddress myDns(192,168,1, 1);
@@ -19,7 +20,6 @@ This value sets the standard LCD output for the second line of a 16x2 screen.
     IPAddress subnet(255, 255, 255, 0);
     EthernetServer server(80);
 
-The network configuration for the Arduino happens here. Most of these values can be commented out and should auto configure.  
 A simple HTML page exists on the webserver with the existing sequences. This is extremely useful for adding new functions and troubleshooting so if new sequences are added, an entry like the one below should also be added in RGBETHLCD.ino:
 
     client.println("<a href=\"/?redon\"\">Turn On RED LED</a>");
