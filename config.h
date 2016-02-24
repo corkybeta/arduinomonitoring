@@ -1,7 +1,7 @@
 //initialising pin outputs 
-int BLUE = 6;                   
-int GREEN = 5; 
 int RED = 3;
+int GREEN = 5;
+int BLUE = 6;
 
 //MAC address is set. values for ip, dns, gateway and subnet are added below
 byte mac[] = {
@@ -19,6 +19,9 @@ int repeats = 0;
 int brightness = 0;
 String readString;
 String standardMessage = "VPW Systems";
+int standardRed = 250;
+int standardGreen = 166;
+int standardBlue = 26;
 
 //i2c LCD
 #define I2C_ADDR 0x27 //address needs to be set, differs between i2c controllers
