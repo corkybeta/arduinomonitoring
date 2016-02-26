@@ -1,8 +1,17 @@
 /*
+ This script utilises an Arduino with an ethernet and RGB shield, plus a 16x2 LCD screen.
+ A web server is hosted on the ethernet shield and the LED output is changed between programmed
+ sequences when an HTTP request is made.
+ 
  * Uno, Ethernet A4 (SDA), A5 (SCL)
  * Mega2560  20 (SDA), 21 (SCL)
  * Leonardo  2 (SDA), 3 (SCL)
  * Due 20 (SDA), 21 (SCL), SDA1, SCL1
+
+ created 22 Feb 2016
+ modified 25 Feb 2016
+ by Corey Wood
+ 
  */
 
 #include <SPI.h>
